@@ -28,7 +28,7 @@ description: Convert OpenAPI/Apifox/Swagger text into Meowgic project service co
    - 路径参数用模板字符串：`` `/api/v1/items/${id}` ``。
    - 只有调用方确实需要整包响应时才传 `{ completeResponse: true }`。
 7. 校验：
-   - 运行项目已有的类型检查或 lint 脚本；如果成本过高，至少运行 `npx tsc --noEmit` 或说明未运行原因。
+   - 运行项目已有的类型检查或 lint 脚本；如果成本过高，至少运行 `npx tsc --noEmit` 或说明未运行的原因。
    - 用 `rg` 检查新增类型/方法是否有命名冲突和未使用导入。
 
 ## OpenAPI 提取规则
