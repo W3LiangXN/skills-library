@@ -1,0 +1,4 @@
+interface:
+  display_name: "Meowgic OpenAPI API Method"
+  short_description: "从 OpenAPI 生成 Meowgic API 方法"
+  default_prompt: "Use $meowgic-openapi-to-api-method to convert this OpenAPI/Apifox text into Meowgic service types and API methods."
