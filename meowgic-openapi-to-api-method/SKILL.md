@@ -1,6 +1,7 @@
 ---
 name: meowgic-openapi-to-api-method
 description: Convert OpenAPI/Apifox/Swagger text into Meowgic project service code with matching TypeScript types and API methods. Use in the meowgic repo when adding or updating files under services from API documentation, especially when the user invokes /meowgic-openapi-to-api-method or asks to generate TS types/API interfaces from OpenAPI text.
+version: 1.0.0
 ---
 
 # Meowgic OpenAPI 到 API 方法
