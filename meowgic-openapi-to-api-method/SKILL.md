@@ -21,7 +21,7 @@ version: 1.0.1
    - Next 同源 route handler 才使用 `bffHttp`；普通 Go 后端接口使用 `http`。
 5. 生成类型：
    - 响应类型只描述业务 `data`，不要把 `{ code, message, data }` 包进普通响应类型。
-   - 对象结构优先用 `export interface`，联合/派生类型用 `export type`，枚举用 `export enum`。
+   - 对象结构优先用 `export interface`，结构联合/派生类型用 `export type`，固定取值的业务字段优先用 `export enum`。
    - 字段注释使用中文 `/** ... */`，接口字段名保持后端原样。
 6. 生成 API 方法：
    - `GET` 查询参数放第二参：`http.get<Response>(url, params)`。
@@ -41,7 +41,7 @@ version: 1.0.1
 - `format: uint64`、`uuid.UUID`、ID 类字段默认用 `string`。
 - `integer` / `number` 映射为 `number`；decimal 金额/积分如文档示例为字符串或项目既有同类字段为字符串时用 `string`。
 - `array` 根据 `items` 映射；复杂未知对象用 `Record<string, unknown>`，不要用裸 `object` 或 `any`。
-- `enum` 有清晰中文说明时生成 `export enum`，成员命名沿用同目录风格；不清晰时可用字面量联合并说明。
+- 认证方式、接入方式、发布状态等固定字符串或数值集合，优先生成 `export enum`，而不是字面量联合 `type`。成员保留后端原始值，命名沿用同目录风格（新模块默认大写下划线），并添加中文注释；缺少中文说明时可依据值的明确含义命名，不因此退回字面量联合，也不臆造业务含义。仅在枚举无法准确表达契约或需保持既有调用兼容时使用联合类型，并说明原因。
 - `deprecated: true` 字段可保留，但注释里标注“已废弃”。
 
 ## 代码生成约束

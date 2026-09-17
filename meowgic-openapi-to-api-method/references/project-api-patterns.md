@@ -80,7 +80,7 @@ export const audioToText = (params: AudioToTextParams) => {
 ## 类型声明风格
 
 - 对象结构用 `export interface` 或同文件既有的 `export type` 风格；同目录已有明显偏好时跟随同目录。
-- 联合类型、字面量联合、工具类型用 `export type`。
+- 结构联合、派生类型、工具类型用 `export type`；固定取值集合按技能正文规则优先用 `export enum`。
 - 枚举用 `export enum`；成员命名跟同目录现有风格，不强制统一大小写。
 - 注释使用中文 `/** ... */`，字段注释放在字段上一行。
 - 类型导入使用 `import type`。

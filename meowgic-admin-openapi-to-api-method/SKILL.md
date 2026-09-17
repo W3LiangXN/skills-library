@@ -18,10 +18,10 @@ description: 将 OpenAPI、Apifox 或 Swagger 文档转换为 meowgic-admin 项�
 
 ## 类型映射
 
-- 后端字段保持原名；对象优先 `export interface`，别名、联合和派生类型用 `export type`。方法及字段使用中文 `/** ... */` 注释，纯类型使用 `import type`，运行时枚举使用普通导入。
+- 后端字段保持原名；对象优先 `export interface`，别名、结构联合和派生类型用 `export type`；固定取值的业务字段优先用 `export enum`。方法及字段使用中文 `/** ... */` 注释，纯类型使用 `import type`，运行时枚举使用普通导入。
 - 按每层对象的 `required` 决定字段可选性；参数必填性与 `requestBody.required` 分别处理。path 参数必填。可选与可空分别表达为 `?` 和 `T | null`，未知结构用 `unknown` 或 `Record<string, unknown>`，不把“不知道”写成可选。
 - 日期时间保持 JSON 的 `string`；数值用 `number`，UUID 用 `string`。ID 与大整数以文档的实际传输类型为准，不仅凭字段名改成字符串；`uint64` 声明与字符串示例冲突时先核对既有接口或澄清。金额同样保留字符串/数值的实际契约。
-- 解析数组 `items`、组合 schema 和枚举，仅生成请求/响应可达的类型。枚举优先沿用模块风格；文档未定义的 UI 筛选值（例如 `ALL`）不进入接口允许值，可复用 `Exclude` 收窄已有枚举。
+- 解析数组 `items`、组合 schema 和枚举，仅生成请求/响应可达的类型。认证方式、接入方式、发布状态等固定字符串或数值集合，优先生成 `export enum`，而不是字面量联合 `type`。成员保留后端原始值，命名沿用模块风格（新模块默认大写下划线），并添加中文注释；缺少中文说明时可依据值的明确含义命名，不因此退回字面量联合，也不臆造业务含义。仅在枚举无法准确表达契约或需保持既有调用兼容时使用联合类型，并说明原因。文档未定义的 UI 筛选值（例如 `ALL`）不进入接口允许值，可复用 `Exclude` 收窄已有枚举。
 - `{ count: number; list: T[] }` 形状及必填性匹配时复用 `IListResult<T>`，否则按文档定义。
 - 从 `@/types/global` 复用 `TCommonParams`、`EOrderBy`、`ESortBy`、`SystemLang` 等兼容类型。`TCommonParams` 字段都是可选的，且包含多种分页/搜索字段；只接受其中一部分的接口使用 `Pick`，必填字段显式收紧，避免继承出文档不存在的参数。
 - 不复制主站的 `CommonPageResponse`、`CommonTimestamp` 或 `TaskState` 到后台。已有类型只有语义和结构均兼容才复用。

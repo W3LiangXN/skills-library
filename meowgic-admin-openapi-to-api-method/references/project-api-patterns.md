@@ -26,11 +26,19 @@
 ```ts
 import type { IListResult, TCommonParams } from "@/types/global";
 
+/** 组件状态 */
+export enum WidgetStatus {
+  /** 已启用 */
+  ENABLED = "enabled",
+  /** 已停用 */
+  DISABLED = "disabled",
+}
+
 /** 组件列表参数 */
 export interface WidgetListParams
   extends Pick<TCommonParams, "page" | "pageSize"> {
   /** 状态 */
-  status: "enabled" | "disabled";
+  status: WidgetStatus;
 }
 
 /** 组件列表项 */
