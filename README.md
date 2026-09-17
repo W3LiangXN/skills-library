@@ -5,6 +5,7 @@
 ## 已有 Skill
 
 - [`meowgic-openapi-to-api-method`](./meowgic-openapi-to-api-method)：将 OpenAPI、Apifox 或 Swagger 文本转换为 Meowgic 项目的 TypeScript service 类型与 API 方法。
+- [`meowgic-admin-openapi-to-api-method`](./meowgic-admin-openapi-to-api-method)：将 OpenAPI、Apifox 或 Swagger 文档转换为 Meowgic Admin 的页面服务与类型，适配后台请求封装、整包操作响应及 mock 接入。
 
 ## 安装
 

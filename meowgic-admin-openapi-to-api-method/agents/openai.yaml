@@ -1,0 +1,4 @@
+interface:
+  display_name: "Meowgic Admin OpenAPI API Method"
+  short_description: "从 OpenAPI 生成 Meowgic Admin 类型与 API 方法"
+  default_prompt: "使用 $meowgic-admin-openapi-to-api-method，将这份 OpenAPI/Apifox 文档转换为 meowgic-admin 的类型声明和 API 方法。"
