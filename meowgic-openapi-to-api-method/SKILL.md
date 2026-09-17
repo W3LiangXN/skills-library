@@ -42,6 +42,7 @@ version: 1.0.1
 - `integer` / `number` 映射为 `number`；decimal 金额/积分如文档示例为字符串或项目既有同类字段为字符串时用 `string`。
 - `array` 根据 `items` 映射；复杂未知对象用 `Record<string, unknown>`，不要用裸 `object` 或 `any`。
 - 认证方式、接入方式、发布状态等固定字符串或数值集合，优先生成 `export enum`，而不是字面量联合 `type`。成员保留后端原始值，命名沿用同目录风格（新模块默认大写下划线），并添加中文注释；缺少中文说明时可依据值的明确含义命名，不因此退回字面量联合，也不臆造业务含义。仅在枚举无法准确表达契约或需保持既有调用兼容时使用联合类型，并说明原因。
+- 接口或嵌套对象字段中的内联固定值联合也按同一规则抽成独立的 `export enum`，即使仅有一个字段使用；字段改为引用枚举，并保留原有的 `?` 和可空性。例如 `userType`、`connectorType`、`authMethod` 分别引用 `ConnectorUserType`、`ConnectorType`、`ConnectorMCPAuthMethod`。枚举名体现业务语义；同义且取值一致时复用已有枚举，不同认证场景按实际含义区分。仅处理本次涉及的类型，不批量改写无关字段。
 - `deprecated: true` 字段可保留，但注释里标注“已废弃”。
 
 ## 代码生成约束
