@@ -1,6 +1,7 @@
 ---
 name: meowgic-admin-openapi-to-api-method
 description: 将 OpenAPI、Apifox 或 Swagger 文档转换为 meowgic-admin 项目的 TypeScript 类型与 API 方法。用于在该项目中新增或更新 src/pages 下的 service.ts、typing.ts，或将已有 mock 服务接入文档中的真实接口；meowgic 主站的 services 代码使用其专属技能。
+version: 1.0.2
 ---
 
 # Meowgic Admin OpenAPI 到 API 方法
@@ -14,6 +15,7 @@ description: 将 OpenAPI、Apifox 或 Swagger 文档转换为 meowgic-admin 项�
 3. 从文档提取 HTTP 方法、原始路径、path/query/header/body 参数、成功状态码、响应 envelope 和实际引用的 schema。解析 `$ref`；缺失的引用或相互矛盾的定义需明确指出，不能凭页面展示字段补造接口。
 4. 选择现有领域目录，扩展 `src/pages/<module>/service.ts` 和 `typing.ts`；嵌套模块沿用现有目录，如 `notification/system`、`subscription/bill`。新领域只创建必要的这两个文件，不附带生成页面、菜单或路由。
 5. 按下述规则生成类型与方法。若接入 mock，只替换文档覆盖的方法，检查真实响应与已有 UI 类型的差异；保留尚未接入的方法及其 mock，不顺手删除整份 mock 文件。
+   - 方法注释使用对应 path 下 HTTP operation 的 `summary`；仅在文档缺少 `summary` 时回退到该 operation 的 `description`，不要使用响应、参数或字段的 `description`。
 6. 对照文档逐项检查路径、参数位置、必填性、响应层级与客户端选择，并执行项目可用的类型检查及目标文件 lint。完成后报告文件、方法与返回类型、校验结果，以及未解决的文档缺口。
 
 ## 类型映射

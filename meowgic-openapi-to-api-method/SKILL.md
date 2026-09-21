@@ -1,7 +1,7 @@
 ---
 name: meowgic-openapi-to-api-method
 description: Convert OpenAPI/Apifox/Swagger text into Meowgic project service code with matching TypeScript types and API methods. Use in the meowgic repo when adding or updating files under services from API documentation, especially when the user invokes /meowgic-openapi-to-api-method or asks to generate TS types/API interfaces from OpenAPI text.
-version: 1.0.1
+version: 1.0.2
 ---
 
 # Meowgic OpenAPI 到 API 方法
@@ -24,6 +24,7 @@ version: 1.0.1
    - 对象结构优先用 `export interface`，结构联合/派生类型用 `export type`，固定取值的业务字段优先用 `export enum`。
    - 字段注释使用中文 `/** ... */`，接口字段名保持后端原样。
 6. 生成 API 方法：
+   - 方法注释使用对应 path 下 HTTP operation 的 `summary`；仅在文档缺少 `summary` 时回退到该 operation 的 `description`，不要使用响应、参数或字段的 `description`。
    - `GET` 查询参数放第二参：`http.get<Response>(url, params)`。
    - `POST` / `PUT` / `DELETE` 请求体放第二参：`http.post<Response>(url, params)`。
    - 路径参数用模板字符串：`` `/api/v1/items/${id}` ``。
